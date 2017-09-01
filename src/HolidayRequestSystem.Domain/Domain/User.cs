@@ -5,11 +5,8 @@ using HolidayRequestSystem.Domain.Utils;
 
 namespace HolidayRequestSystem.Domain.Domain
 {
-    public class User : IAggregate
+    public class User : AggregateBase
     {
-        public IList<IEvent> UncommittedEvents { get; set; }
-        public Guid Id { get; set; }
-
         public User()
         {
             this.UncommittedEvents = new List<IEvent>();
@@ -24,12 +21,6 @@ namespace HolidayRequestSystem.Domain.Domain
         public void Apply(HolidayRequestCreated @event)
         {
 
-        }
-
-        private void Publish(IEvent @event)
-        {
-            this.UncommittedEvents.Add(@event);
-            ((dynamic)this).Apply((dynamic)@event);
         }
     }
 }

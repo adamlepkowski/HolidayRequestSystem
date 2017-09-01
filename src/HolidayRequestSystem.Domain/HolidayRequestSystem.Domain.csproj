@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\AggregateBase.cs" />
     <Compile Include="Utils\EventTypeIdAttribute.cs" />
     <Compile Include="Commands\CreateHolidayRequest.cs" />
     <Compile Include="CommandHandlers\CreateHolidayRequestHandler.cs" />
