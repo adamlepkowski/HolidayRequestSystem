@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using HolidayRequestSystem.Domain.Utils;
 
-namespace HolidayRequestSystem.Domain.Tests.Utils
+namespace HolidayRequestSystem.Domain.Tests.Helpers
 {
     /// <summary>
     /// Mock version of event store.
