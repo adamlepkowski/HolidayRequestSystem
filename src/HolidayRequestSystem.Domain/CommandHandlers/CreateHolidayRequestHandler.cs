@@ -16,11 +16,11 @@ namespace HolidayRequestSystem.Domain.CommandHandlers
 
         public void Handle(CreateHolidayRequest message)
         {
-            var user = _eventStoreRepository.GetById<User>(message.UserId);
+            var user = _eventStoreRepository.GetById<User>(message.UserId); // move it to base class when created
 
             user.CreateHolidayRequest(message.StartDate, message.EndDate);
 
-            _eventStoreRepository.Save(user);
+            _eventStoreRepository.Save(user); // move it to base class when created
         }
     }
 }

@@ -1,16 +1,14 @@
 using System;
-using HolidayRequestSystem.Domain.Utils;
 
-namespace HolidayRequestSystem.Domain.Events
+namespace HolidayRequestSystem.Domain.Domain
 {
-    [EventTypeId("AC0F8448-7A51-4121-97CD-C436F15750DC")]
-    public class HolidayRequestCreated : IEvent
+    public class HolidayRequest
     {
         public Guid Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public HolidayRequestCreated(Guid id, DateTime startDate, DateTime endDate)
+        public HolidayRequest(Guid id, DateTime startDate, DateTime endDate)
         {
             this.Id = id;
             this.StartDate = startDate;

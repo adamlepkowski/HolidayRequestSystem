@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Exceptions\HolidayRequestAlreadyExistsForSpecifiedDateRange.cs" />
+    <Compile Include="Domain\HolidayRequest.cs" />
     <Compile Include="Utils\AggregateBase.cs" />
     <Compile Include="Utils\EventTypeIdAttribute.cs" />
     <Compile Include="Commands\CreateHolidayRequest.cs" />

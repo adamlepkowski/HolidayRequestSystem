@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using HolidayRequestSystem.Domain.CommandHandlers;
 using HolidayRequestSystem.Domain.Commands;
+using HolidayRequestSystem.Domain.Domain.Exceptions;
 using HolidayRequestSystem.Domain.Events;
 using HolidayRequestSystem.Domain.Tests.Helpers;
 using NUnit.Framework;
@@ -11,12 +13,33 @@ namespace HolidayRequestSystem.Domain.Tests
     public class CreateHolidayRequestTests : BaseTest
     {
         [Test]
-        public void when_create_holiday_request_then_holiday_request_created()
+        public void When_create_holiday_request_then_holiday_request_created()
         {
             var createHolidayRequest = new CreateHolidayRequest() { UserId = Guid.Empty };
 
             When(() => new CreateHolidayRequestHandler(this.TestEventStoreRepository).Handle(createHolidayRequest));
             Then(new HolidayRequestCreated(Guid.Empty, new DateTime(), new DateTime()));
+        }
+
+        [TestCaseSource(nameof(HolidayDateRanges))]
+        public void When_create_holiday_for_date_that_already_exists_then_validation_exception_thrown(DateTime startDate, DateTime endDate)
+        {
+            Given(new HolidayRequestCreated(Guid.Empty, new DateTime(2017, 9, 8), new DateTime(2017, 9, 28)));
+            When(() => new CreateHolidayRequestHandler(this.TestEventStoreRepository)
+            .Handle(new CreateHolidayRequest
+            {
+                UserId = Guid.Empty,
+                StartDate = startDate,
+                EndDate = endDate
+            }));
+            ThenExceptionThrown<HolidayRequestAlreadyExistsForSpecifiedDateRange>();
+        }
+        
+        private static IEnumerable<TestCaseData> HolidayDateRanges()
+        {
+            yield return new TestCaseData(new DateTime(2017, 9, 5), new DateTime(2017, 9, 9));
+            yield return new TestCaseData(new DateTime(2017, 9, 10), new DateTime(2017, 9, 15));
+            yield return new TestCaseData(new DateTime(2017, 9, 25), new DateTime(2017, 9, 29));
         }
     }
 }

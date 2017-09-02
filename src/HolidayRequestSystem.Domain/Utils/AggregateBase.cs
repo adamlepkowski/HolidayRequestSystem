@@ -5,6 +5,11 @@ namespace HolidayRequestSystem.Domain.Utils
 {
     public abstract class AggregateBase : IAggregate
     {
+        protected AggregateBase()
+        {
+            this.UncommittedEvents = new List<IEvent>();
+        }
+
         public IList<IEvent> UncommittedEvents { get; set; }
         public Guid Id { get; set; }
 
