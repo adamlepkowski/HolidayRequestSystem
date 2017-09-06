@@ -8,5 +8,7 @@ namespace HolidayRequestSystem.Domain.Commands
         public Guid UserId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public Guid LeaderId { get; set; }
+        public Guid ProjectManagerId { get; set; }
     }
 }

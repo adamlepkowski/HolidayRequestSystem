@@ -13,6 +13,9 @@ namespace HolidayRequestSystem.Domain.Tests
     [TestFixture]
     public class CreateHolidayRequestTests : BaseTest
     {
+        private readonly Guid _leaderId = new Guid("40A388F5-0378-4112-BD5E-28D9F73D50C4");
+        private readonly Guid _projectManagerId = new Guid("DF5CFF5A-8152-4869-A0BD-EDECE726CFC3");
+
         [Test]
         public void When_create_holiday_request_then_holiday_request_created()
         {
@@ -26,15 +29,17 @@ namespace HolidayRequestSystem.Domain.Tests
                 {
                     UserId = Guid.Empty,
                     StartDate = startDate,
-                    EndDate = endDate
+                    EndDate = endDate,
+                    LeaderId = this._leaderId,
+                    ProjectManagerId = this._projectManagerId
                 }));
-            Then(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate));
+            Then(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate, this._leaderId, this._projectManagerId));
         }
 
         [TestCaseSource(nameof(HolidayDateRanges))]
         public void When_create_holiday_for_date_that_already_exists_then_validation_exception_thrown(DateTime startDate, DateTime endDate)
         {
-            Given(new HolidayRequestCreated(GuidGenerator.NewGuid(), new DateTime(2017, 9, 8), new DateTime(2017, 9, 28)));
+            Given(new HolidayRequestCreated(GuidGenerator.NewGuid(), new DateTime(2017, 9, 8), new DateTime(2017, 9, 28), this._leaderId, this._projectManagerId));
             When(() => new CreateHolidayRequestHandler(this.TestEventStoreRepository)
             .Handle(new CreateHolidayRequest
             {

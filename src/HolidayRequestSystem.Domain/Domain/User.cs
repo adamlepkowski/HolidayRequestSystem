@@ -17,14 +17,14 @@ namespace HolidayRequestSystem.Domain.Domain
             this.HolidayRequest = new List<HolidayRequest>();
         }
 
-        public void CreateHolidayRequest(DateTime startDate, DateTime endDate)
+        public void CreateHolidayRequest(DateTime startDate, DateTime endDate, Guid leaderId, Guid projectManagerId)
         {
             if (IsInRange(this.HolidayRequest, startDate, endDate))
             {
                 throw new HolidayRequestAlreadyExistsForSpecifiedDateRange();
             }
 
-            Publish(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate));
+            Publish(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate, leaderId, projectManagerId));
         }
 
         private static bool IsInRange(IList<HolidayRequest> holidayRequests, DateTime startDate, DateTime endDate)
