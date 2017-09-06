@@ -16,6 +16,8 @@ namespace HolidayRequestSystem.Domain.CommandHandlers
 
         public void Handle(CreateHolidayRequest message)
         {
+            // TODO: superficial validations: start and end dates are required && end date is before start date
+
             var user = _eventStoreRepository.GetById<User>(message.UserId); // move it to base class when created
 
             user.CreateHolidayRequest(message.StartDate, message.EndDate);

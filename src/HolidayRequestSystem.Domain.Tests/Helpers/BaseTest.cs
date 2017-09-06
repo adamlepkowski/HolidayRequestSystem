@@ -18,6 +18,8 @@ namespace HolidayRequestSystem.Domain.Tests.Helpers
         {
             this.TestEventStoreRepository = new TestEventStoreRepository();
             this._expectedEvents = new List<IEvent>();
+            this._expectedExceptionType = null;
+            this._actionException = null;
         }
 
         [TearDown]

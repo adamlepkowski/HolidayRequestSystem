@@ -24,7 +24,7 @@ namespace HolidayRequestSystem.Domain.Domain
                 throw new HolidayRequestAlreadyExistsForSpecifiedDateRange();
             }
 
-            Publish(new HolidayRequestCreated(Guid.Empty, startDate, endDate));
+            Publish(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate));
         }
 
         private static bool IsInRange(IList<HolidayRequest> holidayRequests, DateTime startDate, DateTime endDate)
