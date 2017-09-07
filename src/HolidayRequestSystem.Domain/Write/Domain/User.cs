@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HolidayRequestSystem.Domain.Domain.Exceptions;
-using HolidayRequestSystem.Domain.Events;
+using HolidayRequestSystem.Domain.Common.Events;
 using HolidayRequestSystem.Domain.Utils;
+using HolidayRequestSystem.Domain.Write.Domain.Exceptions;
 
-namespace HolidayRequestSystem.Domain.Domain
+namespace HolidayRequestSystem.Domain.Write.Domain
 {
     public class User : AggregateBase
     {

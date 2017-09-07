@@ -1,9 +1,9 @@
-using HolidayRequestSystem.Domain.Commands;
-using HolidayRequestSystem.Domain.Domain;
 using HolidayRequestSystem.Domain.Utils;
+using HolidayRequestSystem.Domain.Write.Commands;
+using HolidayRequestSystem.Domain.Write.Domain;
 using MediatR;
 
-namespace HolidayRequestSystem.Domain.CommandHandlers
+namespace HolidayRequestSystem.Domain.Write.CommandHandlers
 {
     public class CreateHolidayRequestHandler : IRequestHandler<CreateHolidayRequest>
     {

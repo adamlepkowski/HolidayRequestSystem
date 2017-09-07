@@ -1,7 +1,7 @@
 using System;
 using HolidayRequestSystem.Domain.Utils;
 
-namespace HolidayRequestSystem.Domain.Events
+namespace HolidayRequestSystem.Domain.Common.Events
 {
     [EventTypeId("AC0F8448-7A51-4121-97CD-C436F15750DC")]
     public class HolidayRequestCreated : IEvent

@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace HolidayRequestSystem.Domain.Commands
+namespace HolidayRequestSystem.Domain.Write.Commands
 {
     public class CreateHolidayRequest : IRequest
     {

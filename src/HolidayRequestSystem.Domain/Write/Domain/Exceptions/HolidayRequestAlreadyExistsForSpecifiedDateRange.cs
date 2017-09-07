@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HolidayRequestSystem.Domain.Domain.Exceptions
+namespace HolidayRequestSystem.Domain.Write.Domain.Exceptions
 {
     public class HolidayRequestAlreadyExistsForSpecifiedDateRange : Exception
     {

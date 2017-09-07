@@ -1,6 +1,6 @@
 using System;
 
-namespace HolidayRequestSystem.Domain.Domain
+namespace HolidayRequestSystem.Domain.Write.Domain
 {
     public class HolidayRequest // TODO: this will be a seperate aggregate root
     {
