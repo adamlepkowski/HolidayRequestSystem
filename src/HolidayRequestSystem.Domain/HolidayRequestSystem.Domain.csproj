@@ -57,8 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Read\EventHandlers\HolidayRequestCreatedHandler.cs" />
     <Compile Include="Read\Model\Employee.cs" />
     <Compile Include="Read\Model\HolidayRequest.cs" />
+    <Compile Include="Utils\IGenericRepository.cs" />
     <Compile Include="Write\Domain\Exceptions\HolidayRequestAlreadyExistsForSpecifiedDateRange.cs" />
     <Compile Include="Write\Domain\HolidayRequest.cs" />
     <Compile Include="Utils\AggregateBase.cs" />
