@@ -13,7 +13,7 @@ namespace HolidayRequestSystem.Domain.Domain
 
         public User()
         {
-            this.Id = Guid.Empty;
+            this.Id = Guid.Empty; // temporary
             this.HolidayRequest = new List<HolidayRequest>();
         }
 
@@ -24,7 +24,7 @@ namespace HolidayRequestSystem.Domain.Domain
                 throw new HolidayRequestAlreadyExistsForSpecifiedDateRange();
             }
 
-            Publish(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate, leaderId, projectManagerId));
+            Publish(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate, leaderId, projectManagerId, DateTimeProvider.Now));
         }
 
         private static bool IsInRange(IList<HolidayRequest> holidayRequests, DateTime startDate, DateTime endDate)

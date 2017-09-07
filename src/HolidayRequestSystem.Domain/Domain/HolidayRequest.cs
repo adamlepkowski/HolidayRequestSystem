@@ -2,7 +2,7 @@ using System;
 
 namespace HolidayRequestSystem.Domain.Domain
 {
-    public class HolidayRequest
+    public class HolidayRequest // TODO: this will be a seperate aggregate root
     {
         public Guid Id { get; set; }
         public DateTime StartDate { get; set; }

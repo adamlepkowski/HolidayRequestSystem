@@ -11,14 +11,16 @@ namespace HolidayRequestSystem.Domain.Events
         public DateTime EndDate { get; set; }
         public Guid LeaderId { get; set; }
         public Guid ProjectManagerId { get; set; }
+        public DateTime SubmittedAt { get; set; }
 
-        public HolidayRequestCreated(Guid id, DateTime startDate, DateTime endDate, Guid leaderId, Guid projectManagerId)
+        public HolidayRequestCreated(Guid id, DateTime startDate, DateTime endDate, Guid leaderId, Guid projectManagerId, DateTime submittedAt)
         {
             this.Id = id;
             this.StartDate = startDate;
             this.EndDate = endDate;
             this.LeaderId = leaderId;
             this.ProjectManagerId = projectManagerId;
+            this.SubmittedAt = submittedAt;
         }
     }
 }
