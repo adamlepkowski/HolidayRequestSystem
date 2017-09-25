@@ -61,8 +61,6 @@
     <Compile Include="Read\Model\Employee.cs" />
     <Compile Include="Read\Model\HolidayRequest.cs" />
     <Compile Include="Utils\IGenericRepository.cs" />
-    <Compile Include="Write\Domain\Exceptions\HolidayRequestAlreadyExistsForSpecifiedDateRange.cs" />
-    <Compile Include="Write\Domain\HolidayRequest.cs" />
     <Compile Include="Utils\AggregateBase.cs" />
     <Compile Include="Utils\DateTimeProvider.cs" />
     <Compile Include="Utils\GuidGenerator.cs" />
@@ -74,7 +72,9 @@
     <Compile Include="Utils\IEvent.cs" />
     <Compile Include="Utils\IEventStoreRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Write\Domain\User.cs" />
+    <Compile Include="Write\Model\Exceptions\HolidayRequestAlreadyExistsForSpecifiedDateRange.cs" />
+    <Compile Include="Write\Model\HolidayRequest.cs" />
+    <Compile Include="Write\Model\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

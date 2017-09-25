@@ -5,10 +5,10 @@ using HolidayRequestSystem.Domain.Tests.Helpers;
 using HolidayRequestSystem.Domain.Utils;
 using HolidayRequestSystem.Domain.Write.CommandHandlers;
 using HolidayRequestSystem.Domain.Write.Commands;
-using HolidayRequestSystem.Domain.Write.Domain.Exceptions;
+using HolidayRequestSystem.Domain.Write.Model.Exceptions;
 using NUnit.Framework;
 
-namespace HolidayRequestSystem.Domain.Tests
+namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 {
     [TestFixture]
     public class CreateHolidayRequestTests : BaseTest

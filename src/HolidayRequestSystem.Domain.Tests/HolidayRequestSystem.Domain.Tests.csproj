@@ -60,9 +60,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\BaseTest.cs" />
-    <Compile Include="CreateHolidayRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\TestEventStoreRepository.cs" />
+    <Compile Include="Write\CommandHandlers\CreateHolidayRequestTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -73,6 +73,7 @@
       <Name>HolidayRequestSystem.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

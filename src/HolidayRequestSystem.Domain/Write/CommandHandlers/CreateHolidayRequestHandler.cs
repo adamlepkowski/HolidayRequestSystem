@@ -1,6 +1,6 @@
 using HolidayRequestSystem.Domain.Utils;
 using HolidayRequestSystem.Domain.Write.Commands;
-using HolidayRequestSystem.Domain.Write.Domain;
+using HolidayRequestSystem.Domain.Write.Model;
 using MediatR;
 
 namespace HolidayRequestSystem.Domain.Write.CommandHandlers

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using HolidayRequestSystem.Domain.Common.Events;
 using HolidayRequestSystem.Domain.Utils;
-using HolidayRequestSystem.Domain.Write.Domain.Exceptions;
+using HolidayRequestSystem.Domain.Write.Model.Exceptions;
 
-namespace HolidayRequestSystem.Domain.Write.Domain
+namespace HolidayRequestSystem.Domain.Write.Model
 {
     public class User : AggregateBase
     {
