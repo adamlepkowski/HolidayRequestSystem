@@ -30,6 +30,10 @@ namespace HolidayRequestSystem.Domain.Tests.Helpers
                 Assert.IsNotNull(this._expectedExceptionType); // exception occured but not specyfied in ThenExceptionThrown<>()
                 Assert.IsInstanceOf(this._expectedExceptionType, this._actionException);
             }
+            else if (_expectedExceptionType == null && _actionException != null)
+            {
+                throw _actionException;
+            }
             else
             {
                 this.AreEqual(this._expectedEvents, this.TestEventStoreRepository.PublishedEvents);

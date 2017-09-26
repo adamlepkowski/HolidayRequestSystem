@@ -39,9 +39,47 @@ namespace HolidayRequestSystem.Domain.Write.Model
                 startDate < m.EndDate && m.EndDate <= endDate);
         }
 
+        public void AcceptHolidayRequest(Guid holidayRequestId, Guid accepterId)
+        {
+            var holidayRequest = this.HolidayRequest.FirstOrDefault(x => x.Id == holidayRequestId);
+            if (holidayRequest == null)
+            {
+                throw new EntityNotExists(typeof(HolidayRequest), holidayRequestId);
+            }
+
+            if (holidayRequest.LeaderId != accepterId && holidayRequest.ProjectManagerId != accepterId)
+            {
+                throw new OnlyLeaderOrProjectManagerCanAcceptHolidayRequest(accepterId);
+            }
+
+            if (holidayRequest.LeaderId == accepterId)
+            {
+                if (!holidayRequest.AcceptedByProjectManager)
+                {
+                    throw new HolidayRequestMustBeFirstAcceptedByProjectManager();
+                }
+
+                Publish(new HolidayRequestAcceptedByLeader(holidayRequestId, accepterId, DateTimeProvider.Now));
+            }
+
+            if (holidayRequest.ProjectManagerId == accepterId)
+            {
+                Publish(new HolidayRequestAcceptedByProjectManager(holidayRequestId, accepterId, DateTimeProvider.Now));
+            }
+        }
+
         public void Apply(HolidayRequestCreated @event)
         {
-            this.HolidayRequest.Add(new HolidayRequest(@event.Id, @event.StartDate, @event.EndDate));
+            this.HolidayRequest.Add(new HolidayRequest(@event.Id, @event.StartDate, @event.EndDate, @event.LeaderId, @event.ProjectManagerId));
+        }
+
+        public void Apply(HolidayRequestAcceptedByLeader @event)
+        {
+        }
+
+        public void Apply(HolidayRequestAcceptedByProjectManager @event)
+        {
+            this.HolidayRequest.First(x => x.Id == @event.HolidayRequestId).AcceptedByProjectManager = true;
         }
     }
 }

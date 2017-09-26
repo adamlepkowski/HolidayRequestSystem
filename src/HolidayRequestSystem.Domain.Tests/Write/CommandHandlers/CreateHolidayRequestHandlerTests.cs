@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 {
     [TestFixture]
-    public class CreateHolidayRequestTests : BaseTest
+    public class CreateHolidayRequestHandlerTests : BaseTest
     {
         private readonly Guid _leaderId = new Guid("40A388F5-0378-4112-BD5E-28D9F73D50C4");
         private readonly Guid _projectManagerId = new Guid("DF5CFF5A-8152-4869-A0BD-EDECE726CFC3");

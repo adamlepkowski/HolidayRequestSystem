@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Events\HolidayRequestAcceptedByLeader.cs" />
+    <Compile Include="Common\Events\HolidayRequestAcceptedByProjectManager.cs" />
     <Compile Include="Read\EventHandlers\HolidayRequestCreatedHandler.cs" />
     <Compile Include="Read\Model\Employee.cs" />
     <Compile Include="Read\Model\HolidayRequest.cs" />
@@ -65,6 +67,8 @@
     <Compile Include="Utils\DateTimeProvider.cs" />
     <Compile Include="Utils\GuidGenerator.cs" />
     <Compile Include="Utils\EventTypeIdAttribute.cs" />
+    <Compile Include="Write\CommandHandlers\AcceptHolidayRequestHandler.cs" />
+    <Compile Include="Write\Commands\AcceptHolidayRequest.cs" />
     <Compile Include="Write\Commands\CreateHolidayRequest.cs" />
     <Compile Include="Write\CommandHandlers\CreateHolidayRequestHandler.cs" />
     <Compile Include="Common\Events\HolidayRequestCreated.cs" />
@@ -72,7 +76,10 @@
     <Compile Include="Utils\IEvent.cs" />
     <Compile Include="Utils\IEventStoreRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Write\Model\Exceptions\EntityNotExists.cs" />
     <Compile Include="Write\Model\Exceptions\HolidayRequestAlreadyExistsForSpecifiedDateRange.cs" />
+    <Compile Include="Write\Model\Exceptions\HolidayRequestMustBeFirstAcceptedByProjectManager.cs" />
+    <Compile Include="Write\Model\Exceptions\OnlyLeaderOrProjectManagerCanAcceptHolidayRequest.cs" />
     <Compile Include="Write\Model\HolidayRequest.cs" />
     <Compile Include="Write\Model\User.cs" />
   </ItemGroup>
