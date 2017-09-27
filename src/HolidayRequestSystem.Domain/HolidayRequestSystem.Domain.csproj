@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Common\Events\HolidayRequestAcceptedByLeader.cs" />
     <Compile Include="Common\Events\HolidayRequestAcceptedByProjectManager.cs" />
+    <Compile Include="Common\Events\HolidayRequestCanceled.cs" />
     <Compile Include="Read\EventHandlers\HolidayRequestCreatedHandler.cs" />
     <Compile Include="Read\Model\Employee.cs" />
     <Compile Include="Read\Model\HolidayRequest.cs" />
@@ -68,7 +69,9 @@
     <Compile Include="Utils\GuidGenerator.cs" />
     <Compile Include="Utils\EventTypeIdAttribute.cs" />
     <Compile Include="Write\CommandHandlers\AcceptHolidayRequestHandler.cs" />
+    <Compile Include="Write\CommandHandlers\CancelHolidayRequestHandler.cs" />
     <Compile Include="Write\Commands\AcceptHolidayRequest.cs" />
+    <Compile Include="Write\Commands\CancelHolidayRequest.cs" />
     <Compile Include="Write\Commands\CreateHolidayRequest.cs" />
     <Compile Include="Write\CommandHandlers\CreateHolidayRequestHandler.cs" />
     <Compile Include="Common\Events\HolidayRequestCreated.cs" />

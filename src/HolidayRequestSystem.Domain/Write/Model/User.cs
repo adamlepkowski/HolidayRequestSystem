@@ -68,12 +68,27 @@ namespace HolidayRequestSystem.Domain.Write.Model
             }
         }
 
+        public void CancelHolidayRequest(Guid holidayRequestId)
+        {
+            var holidayRequest = this.HolidayRequest.FirstOrDefault(x => x.Id == holidayRequestId);
+            if (holidayRequest == null)
+            {
+                throw new EntityNotExists(typeof(HolidayRequest), holidayRequestId);
+            }
+
+            Publish(new HolidayRequestCanceled(holidayRequestId, DateTimeProvider.Now));
+        }
+
         public void Apply(HolidayRequestCreated @event)
         {
             this.HolidayRequest.Add(new HolidayRequest(@event.Id, @event.StartDate, @event.EndDate, @event.LeaderId, @event.ProjectManagerId));
         }
 
         public void Apply(HolidayRequestAcceptedByLeader @event)
+        {
+        }
+
+        public void Apply(HolidayRequestCanceled @event)
         {
         }
 
