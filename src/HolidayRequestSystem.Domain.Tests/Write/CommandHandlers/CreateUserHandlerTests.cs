@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using HolidayRequestSystem.Domain.Common.Events;
+using HolidayRequestSystem.Domain.Tests.Helpers;
+using HolidayRequestSystem.Domain.Utils;
+using HolidayRequestSystem.Domain.Write.CommandHandlers;
+using HolidayRequestSystem.Domain.Write.Commands;
+using HolidayRequestSystem.Domain.Write.Model.Exceptions;
+using NUnit.Framework;
+
+namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
+{
+    [TestFixture]
+    public class CreateUserHandlerTests : BaseTest
+    {
+        [Test]
+        public void When_create_user_then_user_created()
+        {
+            GuidGenerator.GenerateGuid = () => Guid.Empty;
+            string login = "admin";
+            string password = "pass";
+            
+            When(() => new CreateUserHandler(this.TestEventStoreRepository).Handle(
+                new CreateUser
+                {
+                    Login = login,
+                    Md5Password = password
+                }));
+            Then(new UserCreated(GuidGenerator.NewGuid(), login, password));
+        }
+    }
+}

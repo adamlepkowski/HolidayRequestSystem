@@ -64,6 +64,7 @@
     <Compile Include="Helpers\TestEventStoreRepository.cs" />
     <Compile Include="Write\CommandHandlers\CancelHolidayRequestHandlerTests.cs" />
     <Compile Include="Write\CommandHandlers\AcceptHolidayRequestHandlerTests.cs" />
+    <Compile Include="Write\CommandHandlers\CreateUserHandlerTests.cs" />
     <Compile Include="Write\CommandHandlers\CreateHolidayRequestHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>

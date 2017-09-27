@@ -9,12 +9,18 @@ namespace HolidayRequestSystem.Domain.Write.Model
 {
     public class User : AggregateBase
     {
-        public IList<HolidayRequest> HolidayRequest { get; set; }
+        private string Login { get; set; }
+        private string Md5Password { get; set; }
+        private IList<HolidayRequest> HolidayRequest { get; set; }
 
         public User()
         {
-            this.Id = Guid.Empty; // temporary
             this.HolidayRequest = new List<HolidayRequest>();
+        }
+
+        public User(string login, string md5Password) : this()
+        {
+            Publish(new UserCreated(GuidGenerator.NewGuid(), login, md5Password));
         }
 
         public void CreateHolidayRequest(DateTime startDate, DateTime endDate, Guid leaderId, Guid projectManagerId)
@@ -77,6 +83,13 @@ namespace HolidayRequestSystem.Domain.Write.Model
             }
 
             Publish(new HolidayRequestCanceled(holidayRequestId, DateTimeProvider.Now));
+        }
+
+        public void Apply(UserCreated @event)
+        {
+            this.Id = @event.Id;
+            this.Login = @event.Login;
+            this.Md5Password = @event.Md5Password;
         }
 
         public void Apply(HolidayRequestCreated @event)
