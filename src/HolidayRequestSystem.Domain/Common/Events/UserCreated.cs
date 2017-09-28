@@ -10,9 +10,9 @@ namespace HolidayRequestSystem.Domain.Common.Events
         public string Login { get; set; }
         public string Md5Password { get; set; }
 
-        public UserCreated(Guid Id, string login, string md5Password)
+        public UserCreated(Guid id, string login, string md5Password)
         {
-            this.Id = Id;
+            this.Id = id;
             this.Login = login;
             this.Md5Password = md5Password;
         }

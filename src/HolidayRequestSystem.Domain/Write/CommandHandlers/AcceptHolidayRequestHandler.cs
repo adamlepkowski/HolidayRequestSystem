@@ -1,5 +1,4 @@
-﻿using System;
-using HolidayRequestSystem.Domain.Utils;
+﻿using HolidayRequestSystem.Domain.Utils;
 using HolidayRequestSystem.Domain.Write.Commands;
 using HolidayRequestSystem.Domain.Write.Model;
 using MediatR;
@@ -17,7 +16,7 @@ namespace HolidayRequestSystem.Domain.Write.CommandHandlers
 
         public void Handle(AcceptHolidayRequest message)
         {
-            var user = this._eventStoreRepository.GetById<User>(message.UserId); // TODO: move it to a base class
+            var user = this._eventStoreRepository.GetById<User>(message.UserId);
 
             user.AcceptHolidayRequest(message.HolidayRequestId, message.AccepterId);
 

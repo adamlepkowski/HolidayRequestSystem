@@ -20,11 +20,11 @@ namespace HolidayRequestSystem.Domain.Write.CommandHandlers
             // && end date is before start date
             // && leadId and project manager provided and exist
 
-            var user = _eventStoreRepository.GetById<User>(message.UserId); // move it to base class when created
+            var user = _eventStoreRepository.GetById<User>(message.UserId);
 
             user.CreateHolidayRequest(message.StartDate, message.EndDate, message.LeaderId, message.ProjectManagerId);
 
-            _eventStoreRepository.Save(user); // move it to base class when created
+            _eventStoreRepository.Save(user);
         }
     }
 }

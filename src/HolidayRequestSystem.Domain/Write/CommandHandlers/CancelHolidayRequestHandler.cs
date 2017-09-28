@@ -16,7 +16,7 @@ namespace HolidayRequestSystem.Domain.Write.CommandHandlers
 
         public void Handle(CancelHolidayRequest message)
         {
-            var user = this._eventStoreRepository.GetById<User>(message.UserId); // TODO: move it to a base class
+            var user = this._eventStoreRepository.GetById<User>(message.UserId);
 
             user.CancelHolidayRequest(message.HolidayRequestId);
 

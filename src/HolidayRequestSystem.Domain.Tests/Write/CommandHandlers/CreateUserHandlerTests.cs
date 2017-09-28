@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using HolidayRequestSystem.Domain.Common.Events;
 using HolidayRequestSystem.Domain.Tests.Helpers;
 using HolidayRequestSystem.Domain.Utils;
 using HolidayRequestSystem.Domain.Write.CommandHandlers;
 using HolidayRequestSystem.Domain.Write.Commands;
-using HolidayRequestSystem.Domain.Write.Model.Exceptions;
 using NUnit.Framework;
 
 namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers

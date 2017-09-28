@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using HolidayRequestSystem.Domain.Utils;
 
 namespace HolidayRequestSystem.Domain.Tests.Helpers

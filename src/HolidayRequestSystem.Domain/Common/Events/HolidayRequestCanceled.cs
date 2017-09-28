@@ -7,7 +7,6 @@ namespace HolidayRequestSystem.Domain.Common.Events
     public class HolidayRequestCanceled : IEvent
     {
         public Guid Id { get; set; }
-
         public DateTime SubmittedAt { get; set; }
 
         public HolidayRequestCanceled(Guid id, DateTime submittedAt)
