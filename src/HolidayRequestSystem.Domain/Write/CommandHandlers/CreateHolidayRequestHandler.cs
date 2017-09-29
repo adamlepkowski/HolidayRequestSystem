@@ -1,3 +1,4 @@
+using System;
 using HolidayRequestSystem.Domain.Utils;
 using HolidayRequestSystem.Domain.Write.Commands;
 using HolidayRequestSystem.Domain.Write.Model;
@@ -5,26 +6,24 @@ using MediatR;
 
 namespace HolidayRequestSystem.Domain.Write.CommandHandlers
 {
-    public class CreateHolidayRequestHandler : IRequestHandler<CreateHolidayRequest>
+    public class CreateHolidayRequestHandler : UpdateAggregateRequestHandler<CreateHolidayRequest, User>
     {
-        private readonly IEventStoreRepository _eventStoreRepository;
-
-        public CreateHolidayRequestHandler(IEventStoreRepository eventStoreRepository)
+        public CreateHolidayRequestHandler(IEventStoreRepository eventStoreRepository) : base(eventStoreRepository)
         {
-            _eventStoreRepository = eventStoreRepository;
         }
 
-        public void Handle(CreateHolidayRequest message)
+        protected override Guid GetAggregateId(CreateHolidayRequest message)
+        {
+            return message.UserId;
+        }
+
+        protected override void Handle(User aggregate, CreateHolidayRequest message)
         {
             // TODO: superficial validations: start and end dates are required 
             // && end date is before start date
             // && leadId and project manager provided and exist
 
-            var user = _eventStoreRepository.GetById<User>(message.UserId);
-
-            user.CreateHolidayRequest(message.StartDate, message.EndDate, message.LeaderId, message.ProjectManagerId);
-
-            _eventStoreRepository.Save(user);
+            aggregate.CreateHolidayRequest(message.StartDate, message.EndDate, message.LeaderId, message.ProjectManagerId);
         }
     }
 }

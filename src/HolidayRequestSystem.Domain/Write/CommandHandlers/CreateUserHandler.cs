@@ -5,20 +5,15 @@ using MediatR;
 
 namespace HolidayRequestSystem.Domain.Write.CommandHandlers
 {
-    public class CreateUserHandler : IRequestHandler<CreateUser>
+    public class CreateUserHandler : CreateAggregateRequestHandler<CreateUser, User>
     {
-        private readonly IEventStoreRepository _eventStoreRepository;
-
-        public CreateUserHandler(IEventStoreRepository eventStoreRepository)
+        public CreateUserHandler(IEventStoreRepository eventStoreRepository) : base(eventStoreRepository)
         {
-            _eventStoreRepository = eventStoreRepository;
         }
 
-        public void Handle(CreateUser message)
+        protected override void Handle(User aggregate, CreateUser message)
         {
-            var user = new User(message.Login, message.Md5Password);
-
-            _eventStoreRepository.Save(user);
+            aggregate.CreateUser(message.Login, message.Md5Password);
         }
     }
 }

@@ -71,7 +71,9 @@
     <Compile Include="Utils\EventTypeIdAttribute.cs" />
     <Compile Include="Write\CommandHandlers\AcceptHolidayRequestHandler.cs" />
     <Compile Include="Write\CommandHandlers\CancelHolidayRequestHandler.cs" />
+    <Compile Include="Utils\CreateAggregateRequestHandler.cs" />
     <Compile Include="Write\CommandHandlers\CreateUserHandler.cs" />
+    <Compile Include="Utils\UpdateAggregateRequestHandler.cs" />
     <Compile Include="Write\Commands\AcceptHolidayRequest.cs" />
     <Compile Include="Write\Commands\CancelHolidayRequest.cs" />
     <Compile Include="Write\Commands\CreateHolidayRequest.cs" />

@@ -18,7 +18,7 @@ namespace HolidayRequestSystem.Domain.Write.Model
             this.HolidayRequest = new List<HolidayRequest>();
         }
 
-        public User(string login, string md5Password) : this()
+        public void CreateUser(string login, string md5Password)
         {
             Publish(new UserCreated(GuidGenerator.NewGuid(), login, md5Password));
         }

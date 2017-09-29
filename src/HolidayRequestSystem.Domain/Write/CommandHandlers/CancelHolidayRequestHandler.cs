@@ -1,26 +1,25 @@
-﻿using HolidayRequestSystem.Domain.Utils;
+﻿using System;
+using HolidayRequestSystem.Domain.Utils;
 using HolidayRequestSystem.Domain.Write.Commands;
 using HolidayRequestSystem.Domain.Write.Model;
 using MediatR;
 
 namespace HolidayRequestSystem.Domain.Write.CommandHandlers
 {
-    public class CancelHolidayRequestHandler : IRequestHandler<CancelHolidayRequest>
+    public class CancelHolidayRequestHandler : UpdateAggregateRequestHandler<CancelHolidayRequest, User>
     {
-        private readonly IEventStoreRepository _eventStoreRepository;
-
-        public CancelHolidayRequestHandler(IEventStoreRepository eventStoreRepository)
+        public CancelHolidayRequestHandler(IEventStoreRepository eventStoreRepository) : base(eventStoreRepository)
         {
-            _eventStoreRepository = eventStoreRepository;
         }
 
-        public void Handle(CancelHolidayRequest message)
+        protected override Guid GetAggregateId(CancelHolidayRequest message)
         {
-            var user = this._eventStoreRepository.GetById<User>(message.UserId);
+            return message.UserId;
+        }
 
-            user.CancelHolidayRequest(message.HolidayRequestId);
-
-            _eventStoreRepository.Save(user);
+        protected override void Handle(User aggregate, CancelHolidayRequest message)
+        {
+            aggregate.CancelHolidayRequest(message.HolidayRequestId);
         }
     }
 }
