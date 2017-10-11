@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 {
     [TestFixture]
-    public class CancelHolidayRequestHandlerTests : BaseTest
+    public class CancelHolidayRequestHandlerTests : BaseComandTest<CancelHolidayRequestHandler, CancelHolidayRequest>
     {
         private readonly Guid _holidayRequestId = new Guid("32A388F5-0378-4112-BD5E-28D9F73D50C4");
 
@@ -22,13 +22,11 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 
             Given(new HolidayRequestCreated(existingHolidayRequestId, new DateTime(2017, 9, 8),
                 new DateTime(2017, 10, 10), Guid.NewGuid(), Guid.NewGuid(), DateTimeProvider.Now));
-            When(() => new CancelHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new CancelHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    HolidayRequestId = notExistingHolidayRequestId
-                }
-            ));
+            When(new CancelHolidayRequest
+            {
+                UserId = Guid.Empty,
+                HolidayRequestId = notExistingHolidayRequestId
+            });
             ThenExceptionThrown<EntityNotExists>(); // TODO: improve it to allow verify attributes of the exception as an boolean expression
         }
 
@@ -39,13 +37,11 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 
             Given(new HolidayRequestCreated(_holidayRequestId, new DateTime(2017, 9, 8),
                 new DateTime(2017, 10, 10), Guid.NewGuid(), Guid.NewGuid(), DateTimeProvider.Now));
-            When(() => new CancelHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new CancelHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    HolidayRequestId = _holidayRequestId
-                }
-            ));
+            When(new CancelHolidayRequest
+            {
+                UserId = Guid.Empty,
+                HolidayRequestId = _holidayRequestId
+            });
             Then(new HolidayRequestCanceled(_holidayRequestId, DateTimeProvider.Now));
         }
     }

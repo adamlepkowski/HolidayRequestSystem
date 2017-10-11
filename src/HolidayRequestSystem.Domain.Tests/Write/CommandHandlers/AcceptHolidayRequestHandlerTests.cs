@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 {
     [TestFixture]
-    public class AcceptHolidayRequestHandlerTests : BaseTest
+    public class AcceptHolidayRequestHandlerTests : BaseComandTest<AcceptHolidayRequestHandler, AcceptHolidayRequest>
     {
         private readonly Guid _leaderId = new Guid("40A388F5-0378-4112-BD5E-28D9F73D50C4");
         private readonly Guid _projectManagerId = new Guid("DF5CFF5A-8152-4869-A0BD-EDECE726CFC3");
@@ -24,14 +24,12 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 
             Given(new HolidayRequestCreated(existingHolidayRequestId, new DateTime(2017, 9, 8),
                 new DateTime(2017, 10, 10), Guid.NewGuid(), Guid.NewGuid(), DateTimeProvider.Now));
-            When(() => new AcceptHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new AcceptHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    AccepterId = Guid.Empty,
-                    HolidayRequestId = notExistingHolidayRequestId
-                }
-            ));
+            When(new AcceptHolidayRequest
+            {
+                UserId = Guid.Empty,
+                AccepterId = Guid.Empty,
+                HolidayRequestId = notExistingHolidayRequestId
+            });
             ThenExceptionThrown<EntityNotExists>(); // TODO: improve it to allow verify attributes of the exception as an boolean expression
         }
 
@@ -42,14 +40,12 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 
             Given(new HolidayRequestCreated(this._holidayRequestId, new DateTime(2017, 9, 8),
                 new DateTime(2017, 10, 10), this._leaderId, this._projectManagerId, DateTimeProvider.Now));
-            When(() => new AcceptHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new AcceptHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    AccepterId = notProjectManagerOrLeaderId,
-                    HolidayRequestId = this._holidayRequestId
-                }
-            ));
+            When(new AcceptHolidayRequest
+            {
+                UserId = Guid.Empty,
+                AccepterId = notProjectManagerOrLeaderId,
+                HolidayRequestId = this._holidayRequestId
+            });
             ThenExceptionThrown<OnlyLeaderOrProjectManagerCanAcceptHolidayRequest>(); // TODO: improve it to allow verify attributes of the exception as an boolean expression
         }
 
@@ -61,14 +57,12 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
             Given(new HolidayRequestCreated(this._holidayRequestId, new DateTime(2017, 9, 8),
                 new DateTime(2017, 10, 10), this._leaderId, this._projectManagerId, DateTimeProvider.Now));
             Given(new HolidayRequestAcceptedByProjectManager(this._holidayRequestId, this._leaderId, DateTimeProvider.Now));
-            When(() => new AcceptHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new AcceptHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    AccepterId = this._leaderId,
-                    HolidayRequestId = this._holidayRequestId
-                }
-            ));
+            When(new AcceptHolidayRequest
+            {
+                UserId = Guid.Empty,
+                AccepterId = this._leaderId,
+                HolidayRequestId = this._holidayRequestId
+            });
             Then(new HolidayRequestAcceptedByLeader(this._holidayRequestId, this._leaderId, DateTimeProvider.Now));
         }
 
@@ -79,14 +73,12 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 
             Given(new HolidayRequestCreated(_holidayRequestId, new DateTime(2017, 9, 8),
                 new DateTime(2017, 10, 10), this._leaderId, this._projectManagerId, DateTimeProvider.Now));
-            When(() => new AcceptHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new AcceptHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    AccepterId = this._projectManagerId,
-                    HolidayRequestId = _holidayRequestId
-                }
-            ));
+            When(new AcceptHolidayRequest
+            {
+                UserId = Guid.Empty,
+                AccepterId = this._projectManagerId,
+                HolidayRequestId = _holidayRequestId
+            });
             Then(new HolidayRequestAcceptedByProjectManager(_holidayRequestId, this._projectManagerId, DateTimeProvider.Now));
         }
 
@@ -97,15 +89,12 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 
             Given(new HolidayRequestCreated(this._holidayRequestId, new DateTime(2017, 9, 8),
                 new DateTime(2017, 10, 10), this._leaderId, this._projectManagerId, DateTimeProvider.Now));
-
-            When(() => new AcceptHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new AcceptHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    AccepterId = this._leaderId,
-                    HolidayRequestId = this._holidayRequestId
-                }
-            ));
+            When(new AcceptHolidayRequest
+            {
+                UserId = Guid.Empty,
+                AccepterId = this._leaderId,
+                HolidayRequestId = this._holidayRequestId
+            });
             ThenExceptionThrown<HolidayRequestMustBeFirstAcceptedByProjectManager>();
         }
     }

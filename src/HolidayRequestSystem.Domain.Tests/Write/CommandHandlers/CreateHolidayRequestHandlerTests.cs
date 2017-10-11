@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 {
     [TestFixture]
-    public class CreateHolidayRequestHandlerTests : BaseTest
+    public class CreateHolidayRequestHandlerTests : BaseComandTest<CreateHolidayRequestHandler, CreateHolidayRequest>
     {
         private readonly Guid _leaderId = new Guid("40A388F5-0378-4112-BD5E-28D9F73D50C4");
         private readonly Guid _projectManagerId = new Guid("DF5CFF5A-8152-4869-A0BD-EDECE726CFC3");
@@ -25,15 +25,14 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
             var startDate = new DateTime(2017, 9, 1);
             var endDate = new DateTime(2017, 9, 5);
 
-            When(() => new CreateHolidayRequestHandler(this.TestEventStoreRepository).Handle(
-                new CreateHolidayRequest
-                {
-                    UserId = Guid.Empty,
-                    StartDate = startDate,
-                    EndDate = endDate,
-                    LeaderId = this._leaderId,
-                    ProjectManagerId = this._projectManagerId
-                }));
+            When(new CreateHolidayRequest
+            {
+                UserId = Guid.Empty,
+                StartDate = startDate,
+                EndDate = endDate,
+                LeaderId = this._leaderId,
+                ProjectManagerId = this._projectManagerId
+            });
             Then(new HolidayRequestCreated(GuidGenerator.NewGuid(), startDate, endDate, this._leaderId, this._projectManagerId, DateTimeProvider.Now));
         }
 
@@ -42,13 +41,12 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
         {
             Given(new HolidayRequestCreated(GuidGenerator.NewGuid(), new DateTime(2017, 9, 8),
                 new DateTime(2017, 9, 28), this._leaderId, this._projectManagerId, DateTimeProvider.Now));
-            When(() => new CreateHolidayRequestHandler(this.TestEventStoreRepository)
-            .Handle(new CreateHolidayRequest
+            When(new CreateHolidayRequest
             {
                 UserId = Guid.Empty,
                 StartDate = startDate,
                 EndDate = endDate
-            }));
+            });
             ThenExceptionThrown<HolidayRequestAlreadyExistsForSpecifiedDateRange>();
         }
 

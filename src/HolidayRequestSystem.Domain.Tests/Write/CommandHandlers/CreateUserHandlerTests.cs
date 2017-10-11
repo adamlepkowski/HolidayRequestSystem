@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
 {
     [TestFixture]
-    public class CreateUserHandlerTests : BaseTest
+    public class CreateUserHandlerTests : BaseComandTest<CreateUserHandler, CreateUser>
     {
         [Test]
         public void When_create_user_then_user_created()
@@ -17,13 +17,12 @@ namespace HolidayRequestSystem.Domain.Tests.Write.CommandHandlers
             GuidGenerator.GenerateGuid = () => Guid.Empty;
             string login = "admin";
             string password = "pass";
-            
-            When(() => new CreateUserHandler(this.TestEventStoreRepository).Handle(
-                new CreateUser
-                {
-                    Login = login,
-                    Md5Password = password
-                }));
+
+            When(new CreateUser
+            {
+                Login = login,
+                Md5Password = password
+            });
             Then(new UserCreated(GuidGenerator.NewGuid(), login, password));
         }
     }

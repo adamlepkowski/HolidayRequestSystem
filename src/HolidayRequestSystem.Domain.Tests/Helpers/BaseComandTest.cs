@@ -1,17 +1,21 @@
 using System;
 using System.Collections.Generic;
 using HolidayRequestSystem.Domain.Utils;
+using MediatR;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace HolidayRequestSystem.Domain.Tests.Helpers
 {
-    public class BaseTest
+    public class BaseComandTest<THandler, TCommand>
+        where THandler : IRequestHandler<TCommand>
+        where TCommand : IRequest
     {
         protected TestEventStoreRepository TestEventStoreRepository;
         private List<IEvent> _expectedEvents;
         private Type _expectedExceptionType;
         private Exception _actionException;
+        private THandler _commandHandler;
 
         [SetUp]
         public void Init()
@@ -20,6 +24,12 @@ namespace HolidayRequestSystem.Domain.Tests.Helpers
             this._expectedEvents = new List<IEvent>();
             this._expectedExceptionType = null;
             this._actionException = null;
+            this._commandHandler = InitializeHandler();
+        }
+
+        protected virtual THandler InitializeHandler()
+        {
+            return (THandler)Activator.CreateInstance(typeof(THandler), this.TestEventStoreRepository);
         }
 
         [TearDown]
@@ -45,11 +55,11 @@ namespace HolidayRequestSystem.Domain.Tests.Helpers
             this.TestEventStoreRepository.AddGivenEvent(@event);
         }
 
-        protected void When(Action action)
+        protected void When(TCommand command)
         {
             try
             {
-                action();
+                this._commandHandler.Handle(command);
             }
             catch (Exception e)
             {
